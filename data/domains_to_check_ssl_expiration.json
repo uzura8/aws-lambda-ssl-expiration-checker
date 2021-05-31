@@ -1,0 +1,10 @@
+[
+  {
+    "domain": "www.example.com",
+    "is_enabled": 1,
+    "days_to_notify": {
+      "warning": 14,
+      "alert": 7
+    }
+  }
+]

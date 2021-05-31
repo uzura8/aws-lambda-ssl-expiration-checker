@@ -19,6 +19,11 @@ You need below on local machine
 - aws-cli >= 1.18.X
 - Python >= 3.8
 
+#### Upload Check Target Domains File to S3
+
+* Edit json file ```data/domains_to_check_ssl_expiration.json```
+* Upload to S3 Bucket
+
 
 
 ## Setup
