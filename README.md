@@ -1,4 +1,4 @@
-# SSL Expiration checker by Lambda
+# SSL Expiration checker by Lambda + Python
 
 
 
@@ -6,7 +6,11 @@
 
 ### Create IAM role
 
-Create IAM role attached __"AmazonS3OutpostsReadOnlyAccess"__ and copy arn
+Create IAM role attached below policies and copy Arn
+
+* AWSLambdaExecute
+* AmazonS3ReadOnlyAccess
+* AmazonSESFullAccess
 
 ### Required
 
@@ -36,12 +40,13 @@ Edit functions/lambda.json for your env
   "region": "ap-northeast-1",
   "role": "arn:aws:iam::************:role/iam-role-lambda-development",
   "variables": {
-    "CONFIG_S3_BUCKET_NAME": "site-monitoring-config",
-    "CONFIG_S3_OBJECT_PATH": "domains_to_check_ssl_expiration.json",
+    "CONFIG_S3_BUCKET_NAME": "your-config-bucket-name",
+    "CONFIG_S3_OBJECT_PATH": "your-config-bucket-file-path.json",
     "AWS_SES_REGION": "ap-northeast-1",
-    "SEND_FROM": "from-your-address@example.com",
-    "SEND_TO": "to-your-address@example.com"
-  }
+    "NOTICE_MAIL_FROM": "from-your-address@example.com",
+    "NOTICE_MAIL_TO": "to-your-address@example.com"
+	...
+	}
 }
 ```
 
@@ -85,7 +90,7 @@ Install pip packages
 
 ````bash
 pip install -r requirements.txt
-pip install -r functions/requirements.txt --target functions
+pip install -r functions/requirements.txt -t functions/lib
 ````
 
 
@@ -96,8 +101,13 @@ Execute lambda function on local
 
 ```bash
 cd functions
-python-lambda-local -f lambda_handler lambda_function.py event.json
+python-lambda-local -t 30 -l lib -f lambda_handler lambda_function.py event.json
 ```
+
+#### Options
+
+* -t : timeout (seconds)
+* -l : libraries dir
 
 
 
@@ -105,11 +115,11 @@ python-lambda-local -f lambda_handler lambda_function.py event.json
 
 ```bash
 cd functions
-lambda-uploader
+lambda-uploader -r requirements.txt
 ```
 
 
 
 ## Trigger setting on Lambda Console
 
-hoge
+Add trigger by EventBridge on Lambda console
