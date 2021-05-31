@@ -90,7 +90,7 @@ Install pip packages
 
 ````bash
 pip install -r requirements.txt
-pip install -r functions/requirements.txt -t functions/lib
+pip install -r functions/requirements.txt -t functions_lib
 ````
 
 
@@ -101,7 +101,7 @@ Execute lambda function on local
 
 ```bash
 cd functions
-python-lambda-local -t 30 -l lib -f lambda_handler lambda_function.py event.json
+python-lambda-local -t 30 -l ../functions_lib -f lambda_handler lambda_function.py event.json
 ```
 
 #### Options

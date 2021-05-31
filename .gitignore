@@ -32,3 +32,4 @@ pip-selfcheck.json
 
 /env.sh
 /functions/lambda.json
+/functions_lib
